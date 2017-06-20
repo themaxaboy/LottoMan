@@ -1,7 +1,4 @@
 {
-  "scripts": {
-    "start": "node ."
-  }, 
   "name": "line-bat-sdk-nodejs-example-echobot",
   "version": "0.2.5",
   "description": "A sample Node.js app using Express 4",
