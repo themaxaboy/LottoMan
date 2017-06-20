@@ -6,7 +6,8 @@ var LineBot = require('line-bot-sdk');
 var client = LineBot.client({
   channelID: process.env.YOUR_CHANNEL_ID,
   channelSecret: process.env.YOUR_CHANNEL_SECRET,
-  channelMID: process.env.YOUR_CHANNEL_MID
+  channelMID: process.env.YOUR_CHANNEL_MID,
+  channelToken: process.env.YOUR_CHANNEL_TOKEN
 });
 
 var app = express();
