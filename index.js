@@ -59,7 +59,7 @@ function handleEvent(event) {
     var messengToUser = '';
 
     var reg = new RegExp("\\d{6}");
-    if (reg.test(event.message.text) && (reg.exec(event.message.text)+'').length == 6) {
+    if (reg.test(event.message.text)) {
         var data = price.checkPrice(reg.exec(event.message.text)+'');
         for (var i in data) {
             messengToUser += data[i].text;
