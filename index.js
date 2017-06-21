@@ -61,11 +61,18 @@ function handleEvent(event) {
     var reg = new RegExp("\\d{6}");
     if (reg.test(event.message.text)) {
         var onlyNumber = reg.exec(event.message.text);
-        var data = price.checkPrice(onlyNumber+'');
+        var data = price.checkPrice(onlyNumber);
         for (var i in data) {
             messengToUser += ' ' + data[i].text;
         }
         messengToUser = messengToUser.trim();
+        if (messengToUser)
+        {
+            messengToUser = 'ยินดีด้วยคุณถูก' + messengToUser;
+        }
+        else {
+            messengToUser = 'เสียใจด้วยคุณไม่ถูกรางวัล'
+        }
         messengToUser += '\n' + data[i].date;
     } else {
         messengToUser = 'กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย'
