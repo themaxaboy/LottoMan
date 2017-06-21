@@ -53,7 +53,7 @@ price.loadPrice(startLineApp);
 function handleEvent(event) {
     var messengToUser = '';
 
-    if (event.type !== 'message' || event.message.type !== 'text' || event.message.type !== 'image') {
+    if (event.type !== 'message' || event.message.type !== 'text') {
         // ignore non-text-message event
         return Promise.resolve(null);
     }
