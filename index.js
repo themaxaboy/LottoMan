@@ -66,7 +66,7 @@ function handleEvent(event) {
             messengToUser += ' ' + data[i].text;
         }
         messengToUser = messengToUser.trim();
-        if (messengToUser)
+        if (messengToUser != 'fales')
         {
             messengToUser = 'ยินดีด้วยคุณถูก' + messengToUser;
         }
