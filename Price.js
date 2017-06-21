@@ -73,8 +73,8 @@ const Price = function () {
 
 Price.prototype.loadPrice = function (callback) {
     const options = {
-        uri: 'http://lotto.mthai.com',
-        transform: function (body) {
+        uri: process.env.API_SITE,
+        transform: function (error, response, body) {
             return cheerio.load(body);
         }
     };
