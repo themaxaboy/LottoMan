@@ -1,4 +1,4 @@
-# LINE Bot API EchoBot Example
+# LINE Bot API Lotto checker Example
 
 A LINE Bot API example showing how to receive and return each type of messages.
 

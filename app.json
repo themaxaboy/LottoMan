@@ -1,8 +1,8 @@
 {
-  "name": "LINE Bot integration with Simsimi example",
-  "description": "A LINE Bot server NodeJS example that shows how to use Simsimi to respond users",
+  "name": "LINE Bot API Lotto checker Example",
+  "description": "LINE Bot API Lotto checker Example that shows how to use Simsimi to respond users",
   "repository": "",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["line", "linebot", "simsimi"],
+  "keywords": ["line", "linebot", "lotto"],
   "image": "heroku/nodejs"
 }

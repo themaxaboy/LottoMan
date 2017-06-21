@@ -2,7 +2,6 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
-const Tesseract = require('tesseract.js')
 
 const Price = require('./Price');
 
@@ -49,7 +48,9 @@ function startLineApp() {
 
 // initial data
 var price = new Price();
-price.loadPrice(startLineApp);
+setInterval(function () {
+    price.loadPrice(startLineApp);
+}, 3600000);
 
 // event handler
 function handleEvent(event) {
@@ -61,42 +62,31 @@ function handleEvent(event) {
         return Promise.resolve(null);
     }
 
-    if (event.message.type == 'text') {
-        if (reg.test(event.message.text)) {
-            var data = price.checkPrice(reg.exec(event.message.text) + '');
-            for (var i in data) {
-                messengToUser += '💲 ' + data[i].text;
-            }
-            messengToUser = messengToUser.trim();
-            if (!messengToUser.includes('false')) {
-                messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
-            } else {
-                messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
-            }
-            messengToUser += '\n\n' + '📆 ' + data[i].date;
-        } else {
-            messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
+    if (event.message.type == 'text' && reg.test(event.message.text)) {
+        var data = price.checkPrice(reg.exec(event.message.text) + '');
+        for (var i in data) {
+            messengToUser += '💲 ' + data[i].text;
         }
-    } else if (event.message.type == 'image') {
-        const stream = client.getMessageContent(event.message.id);
-        stream.on('data', (chunk) => {
-            // if we know our image is of spanish words without the letter 'e':
-            var buff = new Buffer(chunk);
-            console.log(buff);
-            Tesseract.recognize('test.jpg', {
-                    lang: 'eng',
-                    classify_bln_numeric_mode: '1'
-                })
-                .then(function (result) {
-                    console.log('result ' + result);
-                    messengToUser = result
-                })
-        });
-        stream.on('error', (err) => {
-            // error handling
-            messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
-        });
+        messengToUser = messengToUser.trim();
+        if (!messengToUser.includes('false')) {
+            messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
+        } else {
+            messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
+        }
+        messengToUser += '\n\n' + '📆 ' + data[i].date;
+    } else {
+        messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
     }
+    /*else if (event.message.type == 'image') {
+           const stream = client.getMessageContent(event.message.id);
+           stream.on('data', (chunk) => {
+               // do soming
+           });
+           stream.on('error', (err) => {
+               // error handling
+               messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
+           });
+       }*/
 
     // create a echoing text message
     const packMessage = {

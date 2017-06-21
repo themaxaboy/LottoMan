@@ -1,14 +1,13 @@
 {
   "name": "lotto-man",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "LINE bot check thai lotto.",
   "main": "index.js",
   "dependencies": {
     "@line/bot-sdk": "^2.0.0",
     "cheerio": "^1.0.0-rc.1",
     "express": "^4.15.3",
-    "request-promise": "^4.2.1",
-    "tesseract.js": "^1.0.10"
+    "request-promise": "^4.2.1"
   },
   "scripts": {
     "start": "node index.js"
