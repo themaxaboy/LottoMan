@@ -83,7 +83,7 @@ function handleEvent(event) {
             // if we know our image is of spanish words without the letter 'e':
             var buff = new Buffer(chunk);
             console.log(buff);
-            Tesseract.detect('https://lotteryinthailand.files.wordpress.com/2013/03/photo-11.jpg', {
+            Tesseract.detect('./test.jpg', {
                     lang: 'eng',
                     classify_bln_numeric_mode: '1'
                 })
