@@ -56,14 +56,14 @@ function handleEvent(event) {
         return Promise.resolve(null);
     }
 
-    var messengToUser = price.checkPrice(event.message.text).text;
+    var messengToUser = price.checkPrice(event.message.text);
 
     // create a echoing text message
-    const echo = {
+    const packMesseng = {
         type: 'text',
         text: messengToUser
     };
 
     // use reply API
-    return client.replyMessage(event.replyToken, echo);
+    return client.replyMessage(event.replyToken, packMesseng);
 }
