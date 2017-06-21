@@ -59,7 +59,7 @@ function handleEvent(event) {
     var messengToUser = '';
     var data = price.checkPrice(event.message.text);
     for (var i in data) {
-        messengToUser += ' ' + data[i];
+        messengToUser += ' ' + data[i].text;
     }
 
     // create a echoing text message
