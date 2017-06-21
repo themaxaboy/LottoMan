@@ -56,7 +56,7 @@ function handleEvent(event) {
         return Promise.resolve(null);
     }
 
-    var messengToUser = price.checkPrice(event.message.text).toString();
+    var messengToUser = price.checkPrice(event.message.text).text;
 
     // create a echoing text message
     const echo = {
