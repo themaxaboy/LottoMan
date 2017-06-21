@@ -67,10 +67,10 @@ function handleEvent(event) {
         messengToUser = messengToUser.trim();
         if (messengToUser != 'false')
         {
-            messengToUser = '􀂲 ยินดีด้วยคุณถูกรางวัล\n\n' + messengToUser;
+            messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🤑\n\n' + messengToUser;
         }
         else {
-            messengToUser = 'เสียใจด้วยคุณไม่ถูกรางวัล'
+            messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
         }
         messengToUser += '\n\n' + data[i].date;
     } else {
