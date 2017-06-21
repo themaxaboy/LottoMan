@@ -1,5 +1,6 @@
 const cheerio = require("cheerio");
-const request = require("request");
+const request = require('request-promise');
+const req = request.defaults();
 
 const Price = function () {
     /******************************************************/
@@ -74,12 +75,12 @@ const Price = function () {
 Price.prototype.loadPrice = function (callback) {
     const options = {
         uri: process.env.API_SITE,
-        transform: function (error, response, body) {
+        transform: function (body) {
             return cheerio.load(body);
         }
     };
     var me = this;
-    request(options).then(function ($) {
+    req(options).then(function ($) {
         $(".prize-1 > div > div > span").each(function () {
             var link = $(this);
             me.price['price1'].data = link.text().split(" ");
