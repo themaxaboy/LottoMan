@@ -60,10 +60,13 @@ function handleEvent(event) {
 
     var reg = new RegExp("\\d{6}");
     if (reg.test(event.message.text)) {
+        var onlyNumber = reg.exec(event.message.text);
         var data = price.checkPrice(event.message.text);
+        console.log("onlyNumber = "+onlyNumber);
         for (var i in data) {
             messengToUser += ' ' + data[i].text;
         }
+        messengToUser = messengToUser.trim();
         messengToUser += '\n' + data[i].date;
     } else {
         messengToUser = 'กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย'
