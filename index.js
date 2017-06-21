@@ -56,14 +56,18 @@ function handleEvent(event) {
         return Promise.resolve(null);
     }
 
-    var messengToUser = price.checkPrice(event.message.text);
+    var messengToUser = '';
+    var data = price.checkPrice(event.message.text);
+    for (var i in data) {
+        messengToUser += ' ' + data[i];
+    }
 
     // create a echoing text message
-    const packMesseng = {
+    const packMessage = {
         type: 'text',
-        text: messengToUser[0]
+        text: messengToUser
     };
 
     // use reply API
-    return client.replyMessage(event.replyToken, packMesseng);
+    return client.replyMessage(event.replyToken, packMessage);
 }

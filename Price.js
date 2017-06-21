@@ -1,8 +1,14 @@
 const cheerio = require("cheerio");
 const request = require('request-promise');
-const req = request.defaults();
+let req = request;
 
-const Price = function () {
+const Price = function (proxy) {
+    if (proxy) {
+        req = request.defaults({
+            proxy: 'http://127.0.0.1:4129/',
+            strictSSL: false
+        });
+    }
     /******************************************************/
     var price1 = {
         data: "",
