@@ -48,6 +48,9 @@ function startLineApp() {
 
 // initial data
 var price = new Price();
+price.loadPrice(startLineApp);
+
+// load data every 1 hour
 setInterval(function () {
     price.loadPrice(startLineApp);
 }, 3600000);
