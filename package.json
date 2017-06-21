@@ -5,9 +5,15 @@
   "main": "index.js",
   "dependencies": {
     "@line/bot-sdk": "^2.0.0",
-    "express": "^4.15.2"
+    "express": "^4.15.3",
+    "cheerio": "^1.0.0-rc.1",
+    "request": "^2.81.0"
   },
   "scripts": {
     "start": "node index.js"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.1",
+    "request": "^2.81.0"
   }
 }
