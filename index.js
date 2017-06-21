@@ -75,6 +75,7 @@ function handleEvent(event) {
             // error handling
             messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
         });
+
     } else if (event.message.type == 'text') {
         var reg = new RegExp("\\d{6}");
         if (reg.test(event.message.text)) {
@@ -92,6 +93,7 @@ function handleEvent(event) {
         } else {
             messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
         }
+        
     } else {
         messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
     }
