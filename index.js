@@ -63,12 +63,12 @@ function handleEvent(event) {
         var onlyNumber = reg.exec(event.message.text);
         var data = price.checkPrice(onlyNumber+'');
         for (var i in data) {
-            messengToUser += ' ' + data[i].text;
+            messengToUser += data[i].text;
         }
         messengToUser = messengToUser.trim();
-        if (messengToUser != 'fales')
+        if (messengToUser != 'false')
         {
-            messengToUser = 'ยินดีด้วยคุณถูก' + messengToUser;
+            messengToUser = 'ยินดีด้วยคุณถูก\n' + messengToUser;
         }
         else {
             messengToUser = 'เสียใจด้วยคุณไม่ถูกรางวัล'
