@@ -57,7 +57,7 @@ function handleEvent(event) {
         return Promise.resolve(null);
     }
     var messengToUser = '';
-
+    console.log(event.message.type);
     if (event.message.type == 'image') {
         const stream = client.getMessageContent(event.message.id);
         stream.on('data', (chunk) => {
@@ -93,7 +93,7 @@ function handleEvent(event) {
         } else {
             messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
         }
-        
+
     } else {
         messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
     }
