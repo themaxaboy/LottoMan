@@ -67,7 +67,7 @@ function handleEvent(event) {
         messengToUser = messengToUser.trim();
         if (messengToUser != 'false')
         {
-            messengToUser = '\u100078' + 'ยินดีด้วยคุณถูกรางวัล\n\n' + messengToUser;
+            messengToUser = '􀂲 ยินดีด้วยคุณถูกรางวัล\n\n' + messengToUser;
         }
         else {
             messengToUser = 'เสียใจด้วยคุณไม่ถูกรางวัล'
