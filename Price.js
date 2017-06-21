@@ -91,7 +91,7 @@ Price.prototype.loadPrice = function (callback) {
     req(options).then(function ($) {
         $(".clearfix > div > div > h2 > a > span").each(function () {
             var link = $(this);
-            me.price.date = link.text();
+            me.price.date = link.text().replace("ตรวจหวย", "งวดวันที่");
             //console.log(me.price.date);
         });
 
