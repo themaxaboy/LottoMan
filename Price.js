@@ -10,6 +10,7 @@ const Price = function (proxy) {
         });
     }
     /******************************************************/
+    var date = "";
     var price1 = {
         data: "",
         name: "รางวัลที่ 1",
@@ -66,6 +67,7 @@ const Price = function (proxy) {
         type: "n"
     };
     this.price = {
+        date: date,
         price1: price1,
         pricel2: pricel2,
         pricef3: pricef3,
@@ -87,6 +89,12 @@ Price.prototype.loadPrice = function (callback) {
     };
     var me = this;
     req(options).then(function ($) {
+        $(".site-head-title > h2 > a > span").each(function () {
+            var link = $(this);
+            me.price.date = link.text();
+            //console.log(me.price.date);
+        });
+
         $(".prize-1 > div > div > span").each(function () {
             var link = $(this);
             me.price['price1'].data = link.text().split(" ");
@@ -162,32 +170,37 @@ Price.prototype.checkPrice = function (input) {
     for (var key in this.price) {
         if (this.price[key].type == 'n' && this.price[key].data.indexOf(input) >= 0) {
             data.push({
-                text: 'ยินดีด้วยคุณถูก' + this.price[key].name + ' มูลค่า ' + numberWithCommas(this.price[key].value)
+                text: 'ยินดีด้วยคุณถูก' + this.price[key].name + ' \nมูลค่า ' + numberWithCommas(this.price[key].value),
+                date: this.price.date
             });
             isCheck = true;
         }
     }
     if (this.price['pricef3'].data.indexOf(f3) >= 0) {
         data.push({
-            text: 'ยินดีด้วยคุณถูก' + this.price['pricef3'].name + ' มูลค่า ' + numberWithCommas(this.price['pricef3'].value)
+            text: 'ยินดีด้วยคุณถูก' + this.price['pricef3'].name + ' \nมูลค่า ' + numberWithCommas(this.price['pricef3'].value),
+            date: this.price.date
         });
         isCheck = true;
     }
     if (this.price['pricel3'].data.indexOf(l3) >= 0) {
         data.push({
-            text: 'ยินดีด้วยคุณถูก' + this.price['pricel3'].name + ' มูลค่า ' + numberWithCommas(this.price['pricel3'].value)
+            text: 'ยินดีด้วยคุณถูก' + this.price['pricel3'].name + ' \nมูลค่า ' + numberWithCommas(this.price['pricel3'].value),
+            date: this.price.date
         });
         isCheck = true;
     }
     if (this.price['pricel2'].data.indexOf(l2) >= 0) {
         data.push({
-            text: 'ยินดีด้วยคุณถูก' + this.price['pricel2'].name + ' มูลค่า ' + numberWithCommas(this.price['pricel2'].value)
+            text: 'ยินดีด้วยคุณถูก' + this.price['pricel2'].name + ' \nมูลค่า ' + numberWithCommas(this.price['pricel2'].value),
+            date: this.price.date
         });
         isCheck = true;
     }
     if (!isCheck) {
         data.push({
             text: 'เสียใจด้วยคุณไม่ถูกรางวัล',
+            date: this.price.date
         });
     }
     return data;
