@@ -51,25 +51,23 @@ price.loadPrice(startLineApp);
 
 // event handler
 function handleEvent(event) {
-    if (event.type !== 'message' || event.message.type !== 'text') {
+    var messengToUser = '';
+
+    if (event.type !== 'message' || event.message.type !== 'text' || event.message.type !== 'image') {
         // ignore non-text-message event
         return Promise.resolve(null);
     }
 
-    var messengToUser = '';
-
     var reg = new RegExp("\\d{6}");
     if (reg.test(event.message.text)) {
-        var data = price.checkPrice(reg.exec(event.message.text)+'');
+        var data = price.checkPrice(reg.exec(event.message.text) + '');
         for (var i in data) {
             messengToUser += '💲 ' + data[i].text;
         }
         messengToUser = messengToUser.trim();
-        if (!messengToUser.includes('false'))
-        {
+        if (!messengToUser.includes('false')) {
             messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
-        }
-        else {
+        } else {
             messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
         }
         messengToUser += '\n\n' + '📆 ' + data[i].date;
@@ -82,7 +80,6 @@ function handleEvent(event) {
         type: 'text',
         text: messengToUser
     };
-
     // use reply API
     return client.replyMessage(event.replyToken, packMessage);
 }
