@@ -56,7 +56,7 @@ function handleEvent(event) {
     var messengToUser = '';
     var reg = new RegExp("\\d{6}");
 
-    if (event.type !== 'message' || (event.message.type !== 'text' || event.message.type !== 'image')) {
+    if (event.type !== 'message' || (event.message.type !== 'text' && event.message.type !== 'image')) {
         // ignore non-text-message event
         return Promise.resolve(null);
     }
