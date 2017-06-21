@@ -62,17 +62,17 @@ function handleEvent(event) {
     if (reg.test(event.message.text)) {
         var data = price.checkPrice(reg.exec(event.message.text)+'');
         for (var i in data) {
-            messengToUser += '💲' + data[i].text;
+            messengToUser += '💲 ' + data[i].text;
         }
         messengToUser = messengToUser.trim();
-        if (messengToUser != 'false')
+        if (!messengToUser.includes('false'))
         {
             messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
         }
         else {
             messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
         }
-        messengToUser += '\n\n' + '📆' + data[i].date;
+        messengToUser += '\n\n' + '📆 ' + data[i].date;
     } else {
         messengToUser = '✉ กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
     }
