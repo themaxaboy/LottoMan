@@ -2,6 +2,7 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
+const Tesseract = require('tesseract.js')
 const Price = require('./Price');
 
 // create LINE SDK config from env variables
@@ -51,30 +52,48 @@ price.loadPrice(startLineApp);
 
 // event handler
 function handleEvent(event) {
-    if (event.type !== 'message' || event.message.type !== 'text') {
+    if (event.type !== 'message' || event.message.type !== 'text' || event.message.type !== 'image') {
         // ignore non-text-message event
         return Promise.resolve(null);
     }
-
     var messengToUser = '';
 
-    var reg = new RegExp("\\d{6}");
-    if (reg.test(event.message.text)) {
-        var data = price.checkPrice(reg.exec(event.message.text)+'');
-        for (var i in data) {
-            messengToUser += '💲 ' + data[i].text;
+    if (event.message.type == 'image') {
+        const stream = client.getMessageContent(event.message.id);
+        stream.on('data', (chunk) => {
+            // if we know our image is of spanish words without the letter 'e':
+            Tesseract.recognize(chunk, {
+                    lang: 'eng',
+                    classify_bln_numeric_mode: 1
+                })
+                .then(function (result) {
+                    messengToUser = result;
+                    console.log(result)
+                })
+        });
+        stream.on('error', (err) => {
+            // error handling
+            messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
+        });
+    } else if (event.message.type == 'text') {
+        var reg = new RegExp("\\d{6}");
+        if (reg.test(event.message.text)) {
+            var data = price.checkPrice(reg.exec(event.message.text) + '');
+            for (var i in data) {
+                messengToUser += '💲 ' + data[i].text;
+            }
+            messengToUser = messengToUser.trim();
+            if (!messengToUser.includes('false')) {
+                messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
+            } else {
+                messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
+            }
+            messengToUser += '\n\n' + '📆 ' + data[i].date;
+        } else {
+            messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
         }
-        messengToUser = messengToUser.trim();
-        if (!messengToUser.includes('false'))
-        {
-            messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
-        }
-        else {
-            messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
-        }
-        messengToUser += '\n\n' + '📆 ' + data[i].date;
     } else {
-        messengToUser = '✉ กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
+        messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
     }
 
     // create a echoing text message
