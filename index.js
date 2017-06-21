@@ -61,7 +61,7 @@ function handleEvent(event) {
     // create a echoing text message
     const packMesseng = {
         type: 'text',
-        text: messengToUser
+        text: messengToUser[0]
     };
 
     // use reply API
