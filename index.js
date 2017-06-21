@@ -81,7 +81,7 @@ function handleEvent(event) {
         const stream = client.getMessageContent(event.message.id);
         stream.on('data', (chunk) => {
             // if we know our image is of spanish words without the letter 'e':
-            buff = new Buffer(chunk, 'utf8');
+            var buff = new Buffer(chunk, 'utf8');
             console.log(buff);
             Tesseract.recognize(buff, {
                     lang: 'eng',
