@@ -19,19 +19,19 @@ const Price = function (proxy) {
     };
     var pricel2 = {
         data: "",
-        name: "เลขท้าย 2 ตัว",
+        name: "รางวัลเลขท้าย 2 ตัว",
         value: 1000,
         type: "2"
     };
     var pricef3 = {
         data: "",
-        name: "เลขหน้า 3 ตัว",
+        name: "รางวัลเลขหน้า 3 ตัว",
         value: 2000,
         type: "f3"
     };
     var pricel3 = {
         data: "",
-        name: "เลขท้าย 3 ตัว",
+        name: "รางวัลเลขท้าย 3 ตัว",
         value: 2000,
         type: "l3"
     };
