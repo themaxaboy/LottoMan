@@ -83,7 +83,7 @@ function handleEvent(event) {
             // if we know our image is of spanish words without the letter 'e':
             var buff = new Buffer(chunk, 'utf8');
             console.log(buff);
-            Tesseract.recognize(buff, {
+            Tesseract.detect(buff, {
                     lang: 'eng',
                     classify_bln_numeric_mode: '1'
                 })
