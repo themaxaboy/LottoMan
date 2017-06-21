@@ -61,7 +61,7 @@ function handleEvent(event) {
     var reg = new RegExp("\\d{6}");
     if (reg.test(event.message.text)) {
         var onlyNumber = reg.exec(event.message.text);
-        var data = price.checkPrice(onlyNumber);
+        var data = price.checkPrice(onlyNumber+'');
         for (var i in data) {
             messengToUser += ' ' + data[i].text;
         }
