@@ -68,7 +68,7 @@ function handleEvent(event) {
 
     if (event.message.type == 'text' && event.message.text == 'หวย') {
         var allPrice = price.getPrice();
-        messengToUser += '📆 ' + allPrice.data.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
+        messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
         messengToUser += allPrice['price1'].name  +' '+ allPrice['price1'].data + '\n';
         messengToUser += allPrice['pricel2'].name +' '+ allPrice['pricel2'].data + '\n';
         messengToUser += allPrice['pricef3'].name +' '+ allPrice['pricef3'].data.toString() + '\n';
@@ -87,7 +87,7 @@ function handleEvent(event) {
         }
         messengToUser += '\n\n' + '📆 ' + data[i].date;
     } else {
-        messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลักหรือส่ง "หวย" เช็ครางวัลงวดล่าสุด 🖼'
+        messengToUser = '🎁 กรุณาส่งเลข 6 หลัก หรือส่ง "หวย" 🖼'
     }
 
     // create a messeng to user text message
