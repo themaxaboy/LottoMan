@@ -53,6 +53,7 @@ price.loadPrice(startLineApp);
 // load data every 1 hour
 setInterval(function () {
     price.loadPrice(startLineApp);
+    console.log("Loop load date.");
 }, 3600000);
 
 // event handler
@@ -60,12 +61,20 @@ function handleEvent(event) {
     var messengToUser = '';
     var reg = new RegExp("\\d{6}");
 
-    if (event.type !== 'message' || (event.message.type !== 'text' && event.message.type !== 'image')) {
+    if (event.type !== 'message' || event.message.type !== 'text') {
         // ignore non-text-message event
         return Promise.resolve(null);
     }
 
-    if (event.message.type == 'text' && reg.test(event.message.text)) {
+    if (event.message.type == 'text' && event.message.text == 'หวย') {
+        var allPrice = price.getPrice();
+        messengToUser += '📆 ' + allPrice.data.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
+        messengToUser += allPrice[price1].name  +' '+ allPrice[price1].data + '\n';
+        messengToUser += allPrice[pricel2].name +' '+ allPrice[pricel2].data + '\n';
+        messengToUser += allPrice[pricef3].name +' '+ allPrice[pricef3].data.toString() + '\n';
+        messengToUser += allPrice[pricel3].name +' '+ allPrice[pricel3].data.toString() + '\n';
+        messengToUser += allPrice[pricen1].name +' '+ allPrice[pricen1].data.toString() + '\n';
+    } else if (event.message.type == 'text' && reg.test(event.message.text)) {
         var data = price.checkPrice(reg.exec(event.message.text) + '');
         for (var i in data) {
             messengToUser += '💲 ' + data[i].text;
@@ -78,20 +87,10 @@ function handleEvent(event) {
         }
         messengToUser += '\n\n' + '📆 ' + data[i].date;
     } else {
-        messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
+        messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลักหรือส่ง "หวย" เช็ครางวัลงวดล่าสุด 🖼'
     }
-    /*else if (event.message.type == 'image') {
-           const stream = client.getMessageContent(event.message.id);
-           stream.on('data', (chunk) => {
-               // do soming
-           });
-           stream.on('error', (err) => {
-               // error handling
-               messengToUser = '🎁 กรุณาส่งตัวเลข 6 หลัก หรือ ภาพถ่าย 🖼'
-           });
-       }*/
 
-    // create a echoing text message
+    // create a messeng to user text message
     const packMessage = {
         type: 'text',
         text: messengToUser
