@@ -102,9 +102,9 @@ function handleEvent(event) {
         messengToUser += '\n\n' + '📆 ' + data[i].date;
     } else if (event.message.type == 'text' && (event.message.text.includes('ขอ 2') || event.message.text.includes('ขอ 3'))) {
         if (event.message.text.includes('2')) {
-            messengToUser = '🎉 ️เลขที่ได้คือ ' + Math.floor((Math.random() * 100) + 1) + '\nขอให้โชคดี 🙋‍️';
+            messengToUser = '🎉 ️เลขที่ได้คือ ' + Math.floor((Math.random() * 100) + 1) + '🎆\n\n🌈 ขอให้โชคดี 🙋‍️';
         } else {
-            messengToUser = '🎉 ️เลขที่ได้คือ ' + Math.floor((Math.random() * 1000) + 1) + '\nขอให้โชคดี 🙋';
+            messengToUser = '🎉 ️เลขที่ได้คือ ' + Math.floor((Math.random() * 1000) + 1) + '🎆\n\n🌈 ขอให้โชคดี 🙋';
         }
     } else {
         messengToUser = '🎁 กรุณาส่งเลข 6 หลัก , ส่ง "หวย" หรือ "?" 🖼'
