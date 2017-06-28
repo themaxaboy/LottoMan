@@ -3,7 +3,7 @@
 const line = require('@line/bot-sdk');
 const express = require('express');
 
-const Price = require('./Price');
+const Price = require('./price');
 
 // create LINE SDK config from env variables
 const config = {
