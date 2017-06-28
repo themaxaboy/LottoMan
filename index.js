@@ -69,11 +69,11 @@ function handleEvent(event) {
     if (event.message.type == 'text' && event.message.text == 'หวย') {
         var allPrice = price.getPrice();
         messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
-        messengToUser += allPrice['price1'].name  +' '+ allPrice['price1'].data + '\n';
-        messengToUser += allPrice['pricel2'].name +' '+ allPrice['pricel2'].data + '\n';
-        messengToUser += allPrice['pricef3'].name +' '+ allPrice['pricef3'].data.toString() + '\n';
-        messengToUser += allPrice['pricel3'].name +' '+ allPrice['pricel3'].data.toString() + '\n';
-        messengToUser += allPrice['pricen1'].name +' '+ allPrice['pricen1'].data.toString() + '\n';
+        messengToUser += '🏆 ' + allPrice['price1'].name  +' : '+ allPrice['price1'].data + '\n';
+        messengToUser += '🎖 ' + allPrice['pricel2'].name +' : '+ allPrice['pricel2'].data + '\n';
+        messengToUser += '🥈 ' + allPrice['pricef3'].name +' : '+ allPrice['pricef3'].data.toString() + '\n';
+        messengToUser += '🥉 ' + allPrice['pricel3'].name +' : '+ allPrice['pricel3'].data.toString() + '\n';
+        messengToUser += '🎆 ' + allPrice['pricen1'].name.replace('รางวัลที่ 1', '') +' : '+ allPrice['pricen1'].data.toString();
     } else if (event.message.type == 'text' && reg.test(event.message.text)) {
         var data = price.checkPrice(reg.exec(event.message.text) + '');
         for (var i in data) {
