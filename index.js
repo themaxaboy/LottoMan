@@ -70,13 +70,12 @@ function handleEvent(event) {
         messengToUser = `📑 วิธีการใช้งาน 💬\n
 ❌ ส่งเลข 6 หลัก เพื่อตรวจรางวัล
 ⭕ ส่งคำว่า "หวย" เพื่อดูรางวัลงวดล่าสุด
-❌ ส่งคำว่า "ขอ 2","ขอ 3" เพื่อขอเลขจาก LottoMan
-⭕ ส่งคำว่า "[เลข 2-3 หลักตามด้วย]?" เพื่อเช็คเลขนี้เด็ดใหม`;
-    } else if (event.message.type == 'text' && event.message.text.includes('?') && event.message.text.length < 5) {
+❌ ส่งคำว่า "ขอ 2" , "ขอ 3" เพื่อขอเลข
+⭕ ส่งคำว่า "[เลข 2-3 หลัก]ต่อด้วย"?" เพื่อเช็คเลขเด็ด`;
+    } else if (event.message.type == 'text' && event.message.text.includes('?') && event.message.text.length < 5 && event.message.text.length > 2) {
         var num2to3 = reg2to3.exec(event.message.text) + '';
         var currentDate = new Date();
-        var total = parseInt(num2to3) + parseInt(currentDate.getMonth());
-        if (total % 2) {
+        if (num2to3.includes(currentDate.getMonth() % 10)) {
             messengToUser = num2to3 + ' เลขนี้เด็ด 👍';
         } else {
             messengToUser = num2to3 + ' เลขไม่เด็ดเลย 👎';
