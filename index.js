@@ -48,10 +48,10 @@ function startLineApp() {
 }
 
 //Prevent Your Heroku Node App From Sleeping
-setInterval(function() {
+/*setInterval(function() {
     http.get("http://lottoman.herokuapp.com");
     console.log("Prevent App From Sleeping.");
-}, 900000); // every 15 minutes (300000)
+}, 900000); // every 15 minutes (300000)*/
 
 // initial data
 var price = new Price();
