@@ -2,6 +2,7 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
+const http = require("http");
 
 const Price = require('./price');
 
@@ -46,6 +47,12 @@ function startLineApp() {
     });
 }
 
+//Prevent Your Heroku Node App From Sleeping
+setInterval(function() {
+    http.get("http://lottoman.herokuapp.com");
+    console.log("Prevent App From Sleeping.");
+}, 1800000); // every 30 minutes (300000)
+
 // initial data
 var price = new Price();
 price.loadPrice(startLineApp);
@@ -53,7 +60,7 @@ price.loadPrice(startLineApp);
 // load data every 1 hour
 setInterval(function () {
     price.loadPrice(startLineApp);
-    console.log("Loop load date.");
+    console.log("Load latest data.");
 }, 3600000);
 
 // event handler
