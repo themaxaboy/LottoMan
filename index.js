@@ -105,7 +105,7 @@ function handleEvent(event) {
         if (event.message.text.includes('2')) {
             messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(0, 2) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋‍️';
         } else {
-            messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(str.length-3, str.length) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋';
+            messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(hash.length-3, hash.length) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋';
         }
     } else {
         messengToUser = '🎁 กรุณาส่งเลข 6 หลัก , ส่ง "หวย" หรือ "?" 🖼'
