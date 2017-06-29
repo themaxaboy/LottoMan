@@ -160,6 +160,18 @@ Price.prototype.getPrice = function () {
     return this.price;
 }
 
+Price.prototype.hashCode = function(){
+    var hash = 0;
+    if (this.price.date.length == 0) return hash;
+    for (i = 0; i < this.price.date.length; i++) {
+        char = this.price.date.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return Math.abs(hash);
+}
+
+
 Price.prototype.checkPrice = function (input) {
     var f3 = input.substring(0, 3);
     var l3 = input.substring(3, 6);
