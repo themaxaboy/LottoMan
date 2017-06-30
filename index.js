@@ -48,8 +48,8 @@ function startLineApp() {
 }
 
 //Prevent Your Heroku Node App From Sleeping
-setInterval(function() {
-    http.get("http://lottoman.herokuapp.com");
+setInterval(function () {
+    http.get("https://lottoman.herokuapp.com");
     console.log("Prevent App From Sleeping.");
 }, 900000); // every 15 minutes (300000)
 
@@ -59,8 +59,10 @@ price.loadPrice(startLineApp);
 
 // load data every 1 hour
 setInterval(function () {
-    price.loadPrice(console.log("Load latest data."));
-}, 3600000);
+    price.loadPrice(function () {
+        console.log("Load latest data.")
+    });
+}, 5000);
 
 // event handler
 function handleEvent(event) {
