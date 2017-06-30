@@ -48,10 +48,10 @@ function startLineApp() {
 }
 
 //Prevent Your Heroku Node App From Sleeping
-/*setInterval(function() {
+setInterval(function() {
     http.get("http://lottoman.herokuapp.com");
     console.log("Prevent App From Sleeping.");
-}, 900000); // every 15 minutes (300000)*/
+}, 900000); // every 15 minutes (300000)
 
 // initial data
 var price = new Price();
@@ -59,8 +59,7 @@ price.loadPrice(startLineApp);
 
 // load data every 1 hour
 setInterval(function () {
-    price.loadPrice(startLineApp);
-    console.log("Load latest data.");
+    price.loadPrice(console.log("Load latest data."));
 }, 3600000);
 
 // event handler
@@ -108,11 +107,11 @@ function handleEvent(event) {
         }
         messengToUser += '\n\n' + '📆 ' + data[i].date;
     } else if (event.message.type == 'text' && (event.message.text.includes('ขอ 2') || event.message.text.includes('ขอ 3'))) {
-        var hash = price.hashCode()+'';
+        var hash = price.hashCode() + '';
         if (event.message.text.includes('2')) {
             messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(0, 2) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋‍️';
         } else {
-            messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(hash.length-3, hash.length) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋';
+            messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(hash.length - 3, hash.length) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋';
         }
     } else {
         messengToUser = '🎁 กรุณาส่งเลข 6 หลัก , ส่ง "หวย" หรือ "?" 🖼'
