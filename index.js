@@ -2,7 +2,7 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
-const http = require("http");
+const http = require('http');
 
 const Price = require('./price');
 

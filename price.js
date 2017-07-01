@@ -221,7 +221,6 @@ Price.prototype.checkPrice = function (input) {
 }
 
 Price.prototype.getList = function () {
-    var data = [];
     const options = {
         uri: 'http://www.glo.or.th/home.php',
         transform: function (body) {
@@ -234,15 +233,13 @@ Price.prototype.getList = function () {
             var href = link.attr("href");
 
             if (href.includes('.pdf')) {
-                var lottoList = 'http://www.glo.or.th' + href
-                return lottoList;
+                return 'http://www.glo.or.th' + href;
             }
         });
     });
 }
 
 Price.prototype.getLive = function () {
-    var data = [];
     const options = {
         uri: 'http://www.glo.or.th/home.php',
         transform: function (body) {
@@ -255,8 +252,7 @@ Price.prototype.getLive = function () {
             var href = link.attr("href");
 
             if (href.includes('youtube.com')) {
-                var lottoLive = href
-                return lottoLive;
+                return href;
             }
         });
     });
