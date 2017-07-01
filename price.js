@@ -228,7 +228,7 @@ Price.prototype.getList = function () {
         }
     };
     var lottoList = request(options).then(function ($) {
-        $("a").each(function () {
+        var dataLink = $("a").each(function () {
             var link = $(this);
             var href = link.attr("href");
 
@@ -236,6 +236,7 @@ Price.prototype.getList = function () {
                 return 'http://www.glo.or.th' + href;
             }
         });
+        return dataLink;
     });
     return lottoList;
 }
@@ -248,7 +249,7 @@ Price.prototype.getLive = function () {
         }
     };
     var lottoLive = request(options).then(function ($) {
-        $("a").each(function () {
+        var dataLink = $("a").each(function () {
             var link = $(this);
             var href = link.attr("href");
 
@@ -256,6 +257,7 @@ Price.prototype.getLive = function () {
                 return href;
             }
         });
+        return dataLink;
     });
     return lottoLive;
 }
