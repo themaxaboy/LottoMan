@@ -233,6 +233,7 @@ Price.prototype.getList = function () {
             var href = link.attr("href");
 
             if (href.includes('.pdf')) {
+                console.log(href);
                 return 'http://www.glo.or.th' + href;
             }
         });
@@ -252,6 +253,7 @@ Price.prototype.getLive = function () {
             var href = link.attr("href");
 
             if (href.includes('youtube.com')) {
+                console.log(href);
                 return href;
             }
         });
