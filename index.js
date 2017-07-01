@@ -126,7 +126,7 @@ function handleEvent(event) {
         }
         messengToUser += '\n\n' + '📆 ' + data[i].date;
         if (allPrice['price1'].data == '') {
-            messengToUser += '\n⏳ อยู่ในช่วงรอประกาศผล 📢\n\n';
+            messengToUser += '\n⏳ อยู่ในช่วงรอประกาศผล 📢';
         }
     } else if (event.message.type == 'text' && (event.message.text.includes('ขอ 2') || event.message.text.includes('ขอ 3'))) {
         var hash = price.hashCode() + '';
