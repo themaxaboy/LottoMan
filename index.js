@@ -58,12 +58,12 @@ setInterval(function () {
 var price = new Price();
 price.loadPrice(startLineApp);
 
-// load data every 1 hour
+// load data every 30 minutes
 setInterval(function () {
     price.loadPrice(function () {
         console.log("Load latest data.")
     });
-}, 3600000);
+}, 1800000);
 
 // event handler
 function handleEvent(event) {
