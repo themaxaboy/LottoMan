@@ -235,10 +235,10 @@ Price.prototype.getList = function () {
 
             if (href.includes('.pdf')) {
                 lottoList = 'http://www.glo.or.th' + href;
+                return lottoList;
             }
         });
     });
-    return lottoList;
 }
 
 Price.prototype.getLive = function () {
@@ -256,10 +256,10 @@ Price.prototype.getLive = function () {
 
             if (href.includes('youtube.com')) {
                 lottoLive = href;
+                return lottoLive;
             }
         });
     });
-    return lottoLive;
 }
 
 function numberWithCommas(x) {
