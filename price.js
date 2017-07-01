@@ -221,29 +221,30 @@ Price.prototype.checkPrice = function (input) {
 }
 
 Price.prototype.getListAndLive = function () {
+    var data = [];
     const options = {
         uri: 'http://www.glo.or.th/home.php',
         transform: function (body) {
             return cheerio.load(body);
         }
     };
-    var data = {
-        lottoList: '',
-        lottoLive: ''
-    }
     request(options).then(function ($) {
         $("a").each(function () {
             var link = $(this);
             var href = link.attr("href");
 
             if (href.includes('.pdf')) {
-                data.lottoList += 'http://www.glo.or.th' + href;
+                data.push({
+                    lottoList: 'http://www.glo.or.th' + href
+                })
             } else if (href.includes('youtube.com')) {
-                data.lottoLive = href;
+                data.push({
+                    lottoLive: href
+                })
             }
         });
-        return data;
     });
+    return data;
 }
 
 function numberWithCommas(x) {
