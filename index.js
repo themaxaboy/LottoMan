@@ -63,7 +63,7 @@ setInterval(function () {
     price.loadPrice(function () {
         console.log("Load latest data.")
     });
-}, 1800000);
+}, 3600000);
 
 // event handler
 function handleEvent(event) {
