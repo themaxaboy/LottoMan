@@ -94,11 +94,11 @@ function handleEvent(event) {
     } else if (event.message.type == 'text' && event.message.text == 'สด') {
         var lottoLive = price.getListAndLive();
         messengToUser += '📺 Live การออกสลากกินแบ่งรัฐบาล\n\n';
-        messengToUser += '👇 คลิกเลย >>> ' + lottoList.lottoLive +' <<< 👍';
+        messengToUser += '👇 คลิกเลย >>> ' + lottoLive['lottoLive'] +' <<< 👍';
     } else if (event.message.type == 'text' && event.message.text == 'เรียงเบอร์') {
         var lottoList = price.getListAndLive();
         messengToUser += '📜 ใบตรวจรางวัลงวดล่าสุด\n\n';
-        messengToUser += '👇 คลิกเลย >>> ' + lottoList.lottoList +' <<< 👍';
+        messengToUser += '👇 คลิกเลย >>> ' + lottoList['lottoList'] +' <<< 👍';
     } else if (event.message.type == 'text' && event.message.text == 'หวย') {
         var allPrice = price.getPrice();
         if (allPrice['price1'].data == '') {
