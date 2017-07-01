@@ -221,45 +221,43 @@ Price.prototype.checkPrice = function (input) {
 }
 
 Price.prototype.getList = function () {
-    var lottoList = '';
     const options = {
         uri: 'http://www.glo.or.th/home.php',
         transform: function (body) {
             return cheerio.load(body);
         }
     };
-    request(options).then(function ($) {
+    var lottoList = request(options).then(function ($) {
         $("a").each(function () {
             var link = $(this);
             var href = link.attr("href");
 
             if (href.includes('.pdf')) {
-                lottoList = 'http://www.glo.or.th' + href;
-                return lottoList;
+                return 'http://www.glo.or.th' + href;
             }
         });
     });
+    return lottoList;
 }
 
 Price.prototype.getLive = function () {
-    var lottoLive = '';
     const options = {
         uri: 'http://www.glo.or.th/home.php',
         transform: function (body) {
             return cheerio.load(body);
         }
     };
-    request(options).then(function ($) {
+    var lottoLive = request(options).then(function ($) {
         $("a").each(function () {
             var link = $(this);
             var href = link.attr("href");
 
             if (href.includes('youtube.com')) {
-                lottoLive = href;
-                return lottoLive;
+                return href;
             }
         });
     });
+    return lottoLive;
 }
 
 function numberWithCommas(x) {
