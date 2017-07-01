@@ -220,7 +220,7 @@ Price.prototype.checkPrice = function (input) {
     return data;
 }
 
-Price.prototype.getListAndLive = function () {
+Price.prototype.getList = function () {
     var data = [];
     const options = {
         uri: 'http://www.glo.or.th/home.php',
@@ -234,17 +234,32 @@ Price.prototype.getListAndLive = function () {
             var href = link.attr("href");
 
             if (href.includes('.pdf')) {
-                data.push({
-                    lottoList: 'http://www.glo.or.th' + href
-                })
-            } else if (href.includes('youtube.com')) {
-                data.push({
-                    lottoLive: href
-                })
+                var lottoList = 'http://www.glo.or.th' + href
+                return lottoList;
             }
         });
     });
-    return data;
+}
+
+Price.prototype.getLive = function () {
+    var data = [];
+    const options = {
+        uri: 'http://www.glo.or.th/home.php',
+        transform: function (body) {
+            return cheerio.load(body);
+        }
+    };
+    request(options).then(function ($) {
+        $("a").each(function () {
+            var link = $(this);
+            var href = link.attr("href");
+
+            if (href.includes('youtube.com')) {
+                var lottoLive = href
+                return lottoLive;
+            }
+        });
+    });
 }
 
 function numberWithCommas(x) {
