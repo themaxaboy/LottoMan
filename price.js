@@ -1,14 +1,7 @@
 const cheerio = require("cheerio");
 const request = require('request-promise');
-let req = request;
 
-const Price = function (proxy) {
-    if (proxy) {
-        req = request.defaults({
-            proxy: 'http://127.0.0.1:4129/',
-            strictSSL: false
-        });
-    }
+const Price = function () {
     /******************************************************/
     var date = "";
     var price1 = {
@@ -88,40 +81,47 @@ Price.prototype.loadPrice = function (callback) {
         }
     };
     var me = this;
-    req(options).then(function ($) {
+    request(options).then(function ($) {
         $(".clearfix > div > div > h2 > a > span").each(function () {
             var link = $(this);
+            me.price.date = '';
             me.price.date = link.text().replace("ตรวจหวย", "งวดวันที่");
             //console.log(me.price.date);
         });
 
         $(".prize-1 > div > div > span").each(function () {
             var link = $(this);
+            me.price['price1'].data = '';
             me.price['price1'].data = link.text().split(" ");
         });
 
         $(".prize-l2 > div > div > span").each(function () {
             var link = $(this);
+            me.price['pricel2'].data = '';
             me.price['pricel2'].data = link.text().split(" ");
         });
 
         $(".prize-f3 > div > span > span").each(function () {
             var link = $(this);
+            me.price['pricef3'].data = [];
             me.price['pricef3'].data = link.text().split(" ");
         });
 
         $(".prize-l3 > div > span > span").each(function () {
             var link = $(this);
+            me.price['pricel3'].data = [];
             me.price['pricel3'].data = link.text().split(" ");
         });
 
         $(".prize-n1 > div > span > span").each(function () {
             var link = $(this);
+            me.price['pricen1'].data = [];
             me.price['pricen1'].data = link.text().split(" ");
         });
         /*******************************************************/
         $(".prize-2 > div").each(function () {
             var link = $(this);
+            me.price['price2'].data = [];
             me.price['price2'].data = link.text();
             me.price['price2'].data = me.price['price2'].data.split('\t').join('').split('\n').join(' ').split(" ");
             me.price['price2'].data.shift();
@@ -130,6 +130,7 @@ Price.prototype.loadPrice = function (callback) {
 
         $(".prize-3 > div").each(function () {
             var link = $(this);
+            me.price['price3'].data = [];
             me.price['price3'].data = link.text();
             me.price['price3'].data = me.price['price3'].data.split('\t').join('').split('\n').join(' ').split(" ");
             me.price['price3'].data.shift();
@@ -138,6 +139,7 @@ Price.prototype.loadPrice = function (callback) {
 
         $(".prize-4 > div").each(function () {
             var link = $(this);
+            me.price['price4'].data = [];
             me.price['price4'].data = link.text();
             me.price['price4'].data = me.price['price4'].data.split('\t').join('').split('\n').join(' ').split(" ");
             me.price['price4'].data.shift();
@@ -146,6 +148,7 @@ Price.prototype.loadPrice = function (callback) {
 
         $(".prize-5 > div").each(function () {
             var link = $(this);
+            me.price['price5'].data = [];
             me.price['price5'].data = link.text();
             me.price['price5'].data = me.price['price5'].data.split('\t').join('').split('\n').join(' ').split(" ");
             me.price['price5'].data.shift();

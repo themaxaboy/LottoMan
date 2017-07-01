@@ -91,24 +91,35 @@ function handleEvent(event) {
         }
     } else if (event.message.type == 'text' && event.message.text == 'หวย') {
         var allPrice = price.getPrice();
-        messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
-        messengToUser += '🏆 ' + allPrice['price1'].name + ' : ' + allPrice['price1'].data + '\n';
-        messengToUser += '🎖 ' + allPrice['pricel2'].name + ' : ' + allPrice['pricel2'].data + '\n';
-        messengToUser += '💸 ' + allPrice['pricef3'].name + ' : ' + allPrice['pricef3'].data.toString() + '\n';
-        messengToUser += '💸 ' + allPrice['pricel3'].name + ' : ' + allPrice['pricel3'].data.toString() + '\n';
-        messengToUser += '🎆 ' + allPrice['pricen1'].name.replace('รางวัลที่ 1', '') + ' : ' + allPrice['pricen1'].data.toString();
-    } else if (event.message.type == 'text' && reg.test(event.message.text)) {
-        var data = price.checkPrice(reg.exec(event.message.text) + '');
-        for (var i in data) {
-            messengToUser += '💲 ' + data[i].text;
-        }
-        messengToUser = messengToUser.trim();
-        if (!messengToUser.includes('false')) {
-            messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
+        if (allPrice['price1'].data == '') {
+            messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
+            messengToUser += '⏳ อยู่ในช่วงรอประกาศผล 📢';
         } else {
-            messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
+            messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
+            messengToUser += '🏆 ' + allPrice['price1'].name + ' : ' + allPrice['price1'].data + '\n';
+            messengToUser += '🎖 ' + allPrice['pricel2'].name + ' : ' + allPrice['pricel2'].data + '\n';
+            messengToUser += '💸 ' + allPrice['pricef3'].name + ' : ' + allPrice['pricef3'].data.toString() + '\n';
+            messengToUser += '💸 ' + allPrice['pricel3'].name + ' : ' + allPrice['pricel3'].data.toString() + '\n';
+            messengToUser += '🎆 ' + allPrice['pricen1'].name.replace('รางวัลที่ 1', '') + ' : ' + allPrice['pricen1'].data.toString();
         }
-        messengToUser += '\n\n' + '📆 ' + data[i].date;
+    } else if (event.message.type == 'text' && reg.test(event.message.text) && event.message.text.length == 6) {
+        var allPrice = price.getPrice();
+        if (allPrice['price1'].data == '') {
+            messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
+            messengToUser += '⏳ อยู่ในช่วงรอประกาศผล 📢';
+        } else {
+            var data = price.checkPrice(reg.exec(event.message.text) + '');
+            for (var i in data) {
+                messengToUser += '💲 ' + data[i].text;
+            }
+            messengToUser = messengToUser.trim();
+            if (!messengToUser.includes('false')) {
+                messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
+            } else {
+                messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
+            }
+            messengToUser += '\n\n' + '📆 ' + data[i].date;
+        }
     } else if (event.message.type == 'text' && (event.message.text.includes('ขอ 2') || event.message.text.includes('ขอ 3'))) {
         var hash = price.hashCode() + '';
         if (event.message.text.includes('2')) {
