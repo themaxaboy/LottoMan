@@ -80,7 +80,9 @@ function handleEvent(event) {
 ❌ ส่งเลข 6 หลัก เพื่อตรวจรางวัล
 ⭕ ส่งคำว่า "หวย" เพื่อดูรางวัลงวดล่าสุด
 ❌ ส่งคำว่า "ขอ 2" , "ขอ 3" เพื่อขอเลข
-⭕ ส่งคำว่า "[เลข 2-3 หลัก]ต่อด้วย"?" เพื่อเช็คเลขเด็ด`;
+⭕ ส่งคำว่า "[เลข 2-3 หลัก]ต่อด้วย"?" เพื่อเช็คเลขเด็ด;
+❌ ส่งคำว่า "สด" เพื่อขอ Live การออกรางวัล
+⭕ ส่งคำว่า "เรียงเบอร์" เพื่อขอใบตรวจรางวัล`;
     } else if (event.message.type == 'text' && event.message.text.includes('?') && event.message.text.length < 5 && event.message.text.length > 2) {
         var num2to3 = reg2to3.exec(event.message.text) + '';
         var currentDate = new Date();
@@ -89,6 +91,14 @@ function handleEvent(event) {
         } else {
             messengToUser = num2to3 + ' เลขไม่เด็ดเลย 👎';
         }
+    } else if (event.message.type == 'text' && event.message.text == 'สด') {
+        var lottoLive = price.getListAndLive();
+        messengToUser += '📺 Live การออกสลากกินแบ่งรัฐบาล\n\n';
+        messengToUser += '👇 คลิกเลย >>> ' + lottoList.lottoLive +' <<< 👍';
+    } else if (event.message.type == 'text' && event.message.text == 'เรียงเบอร์') {
+        var lottoList = price.getListAndLive();
+        messengToUser += '📜 ใบตรวจรางวัลงวดล่าสุด\n\n';
+        messengToUser += '👇 คลิกเลย >>> ' + lottoList.lottoList +' <<< 👍';
     } else if (event.message.type == 'text' && event.message.text == 'หวย') {
         var allPrice = price.getPrice();
         if (allPrice['price1'].data == '') {
