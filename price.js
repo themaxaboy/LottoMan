@@ -243,8 +243,8 @@ Price.prototype.getListAndLive = function () {
                 })
             }
         });
+        return data;
     });
-    return data;
 }
 
 function numberWithCommas(x) {
