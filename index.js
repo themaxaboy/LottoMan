@@ -58,7 +58,7 @@ setInterval(function () {
 var price = new Price();
 price.loadPrice(startLineApp);
 
-// load data every 30 minutes
+// load data every 1 hour
 setInterval(function () {
     price.loadPrice(function () {
         console.log("Load latest data.")
@@ -76,67 +76,48 @@ function handleEvent(event) {
         return Promise.resolve(null);
     }
     if (event.message.type == 'text' && event.message.text == '?') {
-        messengToUser = `📑 วิธีการใช้งาน 💬\n
-❌ ส่งเลข 6 หลัก เพื่อตรวจรางวัล
-⭕ ส่งคำว่า "หวย" เพื่อดูรางวัลงวดล่าสุด
-❌ ส่งคำว่า "ขอ 2" , "ขอ 3" เพื่อขอเลข
-⭕ ส่งคำว่า "[เลข 2-3 หลัก]ต่อด้วย"?" เพื่อเช็คเลขเด็ด;
-❌ ส่งคำว่า "สด" เพื่อขอ Live การออกรางวัล
-⭕ ส่งคำว่า "เรียงเบอร์" เพื่อขอใบตรวจรางวัล`;
+        messengToUser = ` วิธีการใช้งาน \n
+ ส่งเลข 6 หลัก เพื่อตรวจรางวัล
+ ส่งคำว่า "หวย" เพื่อดูรางวัลงวดล่าสุด
+ ส่งคำว่า "ขอ 2" , "ขอ 3" เพื่อขอเลข
+ ส่งคำว่า "[เลข 2-3 หลัก]ต่อด้วย"?" เพื่อเช็คเลขเด็ด`;
     } else if (event.message.type == 'text' && event.message.text.includes('?') && event.message.text.length < 5 && event.message.text.length > 2) {
         var num2to3 = reg2to3.exec(event.message.text) + '';
         var currentDate = new Date();
         if (num2to3.includes(currentDate.getMonth() % 10)) {
-            messengToUser = num2to3 + ' เลขนี้เด็ด 👍';
+            messengToUser = num2to3 + ' เลขนี้เด็ด ';
         } else {
-            messengToUser = num2to3 + ' เลขไม่เด็ดเลย 👎';
+            messengToUser = num2to3 + ' เลขไม่เด็ดเลย ';
         }
-    } else if (event.message.type == 'text' && event.message.text == 'สด') {
-        var ListAndLive = price.getListAndLive();
-        messengToUser += '📺 Live การออกสลากกินแบ่งรัฐบาล\n\n';
-        messengToUser += '👇 คลิกเลย >>> ' + ListAndLive.lottoLive + ' <<< 👍';
-    } else if (event.message.type == 'text' && event.message.text == 'เรียงเบอร์') {
-        var ListAndLive = price.getListAndLive();
-        messengToUser += '📜 ใบตรวจรางวัลงวดล่าสุด\n\n';
-        messengToUser += '👇 คลิกเลย >>> ' + ListAndLive.lottoList + ' <<< 👍';
     } else if (event.message.type == 'text' && event.message.text == 'หวย') {
         var allPrice = price.getPrice();
-        if (allPrice['price1'].data == '') {
-            messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
-            messengToUser += '⏳ อยู่ในช่วงรอประกาศผล 📢';
-        } else {
-            messengToUser += '📆 ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
-            messengToUser += '🏆 ' + allPrice['price1'].name + ' : ' + allPrice['price1'].data + '\n';
-            messengToUser += '🎖 ' + allPrice['pricel2'].name + ' : ' + allPrice['pricel2'].data + '\n';
-            messengToUser += '💸 ' + allPrice['pricef3'].name + ' : ' + allPrice['pricef3'].data.toString() + '\n';
-            messengToUser += '💸 ' + allPrice['pricel3'].name + ' : ' + allPrice['pricel3'].data.toString() + '\n';
-            messengToUser += '🎆 ' + allPrice['pricen1'].name.replace('รางวัลที่ 1', '') + ' : ' + allPrice['pricen1'].data.toString();
-        }
-    } else if (event.message.type == 'text' && reg.test(event.message.text) && event.message.text.length == 6) {
-        var allPrice = price.getPrice();
+        messengToUser += ' ' + allPrice.date.replace('ตรวจหวย', 'งวดวันที่') + '\n\n';
+        messengToUser += ' ' + allPrice['price1'].name + ' : ' + allPrice['price1'].data + '\n';
+        messengToUser += ' ' + allPrice['pricel2'].name + ' : ' + allPrice['pricel2'].data + '\n';
+        messengToUser += ' ' + allPrice['pricef3'].name + ' : ' + allPrice['pricef3'].data.toString() + '\n';
+        messengToUser += ' ' + allPrice['pricel3'].name + ' : ' + allPrice['pricel3'].data.toString() + '\n';
+        messengToUser += ' ' + allPrice['pricen1'].name.replace('รางวัลที่ 1', '') + ' : ' + allPrice['pricen1'].data.toString();
+    } else if (event.message.type == 'text' && reg.test(event.message.text)) {
         var data = price.checkPrice(reg.exec(event.message.text) + '');
         for (var i in data) {
-            messengToUser += '💲 ' + data[i].text;
+            messengToUser += ' ' + data[i].text;
         }
         messengToUser = messengToUser.trim();
         if (!messengToUser.includes('false')) {
-            messengToUser = '🏆 ยินดีด้วยคุณถูกรางวัล 🌟\n\n' + messengToUser;
+            messengToUser = ' ยินดีด้วยคุณถูกรางวัล \n\n' + messengToUser;
         } else {
-            messengToUser = '😭 เสียใจด้วยคุณไม่ถูกรางวัล 💔'
+            messengToUser = ' เสียใจด้วยคุณไม่ถูกรางวัล '
         }
-        messengToUser += '\n\n' + '📆 ' + data[i].date;
-        if (allPrice['price1'].data == '') {
-            messengToUser += '\n⏳ อยู่ในช่วงรอประกาศผล 📢';
-        }
+        messengToUser += '\n\n' + ' ' + data[i].date;
     } else if (event.message.type == 'text' && (event.message.text.includes('ขอ 2') || event.message.text.includes('ขอ 3'))) {
         var hash = price.hashCode() + '';
         if (event.message.text.includes('2')) {
-            messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(0, 2) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋‍️';
+            messengToUser = ' ️เลขที่ได้คือ ' + hash.substring(0, 2) + ' \n\n ขอให้โชคดี ‍️';
         } else {
-            messengToUser = '🎉 ️เลขที่ได้คือ ' + hash.substring(hash.length - 3, hash.length) + ' 🎆\n\n🌈 ขอให้โชคดี 🙋';
+            messengToUser = ' ️เลขที่ได้คือ ' + hash.substring(hash.length - 3, hash.length) + ' \n\n ขอให้โชคดี ';
         }
     } else {
-        messengToUser = '🎁 กรุณาส่งเลข 6 หลัก , ส่ง "หวย" หรือ "?" 🖼'
+        messengToUser = ' กรุณาส่งเลข 6 หลัก , ส่ง "หวย" หรือ "?" '
     }
 
     // create a messeng to user text message
